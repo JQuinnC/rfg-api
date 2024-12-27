@@ -19,6 +19,7 @@ module.exports.init = function() {
   var fstream = require('fstream');
   var mkdirp = require('mkdirp');
   var axios = require('axios');
+  const apiKey = process.env.RFG_API_KEY;
 
   exports.fileToBase64 = function(file, callback) {
     fs.readFile(file, { encoding: null }, function(error, file) {
@@ -302,6 +303,17 @@ module.exports.init = function() {
       .replace(/\\b/g, "\\b")
       .replace(/\\f/g, "\\f");
   };
+
+  function validateApiKey(req, res, next) {
+    const providedKey = req.headers['x-api-key'];
+    
+    if (!providedKey || providedKey !== apiKey) {
+      res.status(401).json({ error: 'Invalid API key' });
+      return;
+    }
+    
+    next();
+  }
 
   return exports;
 };
