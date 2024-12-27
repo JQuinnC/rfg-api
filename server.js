@@ -10,8 +10,15 @@ function validateApiKey(req, res, next) {
   const providedKey = req.headers['x-api-key'];
   const apiKey = process.env.API_KEY;
   
+  console.log('Provided API Key:', providedKey);
+  console.log('Environment API Key:', apiKey);
+  
   if (!providedKey || providedKey !== apiKey) {
-    res.status(401).json({ error: 'Invalid API key' });
+    res.status(401).json({ 
+      error: 'Invalid API key',
+      provided: providedKey ? 'Key provided' : 'No key provided',
+      expected: apiKey ? 'Key exists in env' : 'No key in env'
+    });
     return;
   }
   
@@ -45,4 +52,5 @@ app.get('/', (req, res) => {
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  console.log('API Key in environment:', process.env.API_KEY ? 'Present' : 'Missing');
 }); 
