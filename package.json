@@ -6,7 +6,7 @@
     "express": "^4.18.2",
     "axios": "^1.6.2",
     "node-unzip-2": "^0.2.8",
-    "metaparser": "^1.0.8",
+    "metaparser": "1.0.7",
     "fstream": "^1.0.12",
     "mkdirp": "^3.0.1"
   },
