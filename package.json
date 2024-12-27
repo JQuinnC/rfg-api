@@ -1,40 +1,19 @@
 {
   "name": "rfg-api",
-  "description": "RealFaviconGenerator API",
-  "version": "0.5.3",
-  "homepage": "https://github.com/RealFaviconGenerator/rfg-api",
-  "author": {
-    "name": "Philippe Bernard",
-    "email": "philippe@realfavicongenerator.net"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:RealFaviconGenerator/rfg-api.git"
-  },
-  "bugs": {
-    "url": "https://github.com/RealFaviconGenerator/rfg-api/issues"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">= 0.8.0"
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.2",
+    "node-unzip-2": "^0.2.8",
+    "metaparser": "^1.0.8",
+    "fstream": "^1.0.12",
+    "mkdirp": "^3.0.1"
   },
   "scripts": {
-    "test": "mocha"
+    "start": "node server.js"
   },
-  "dependencies": {
-    "axios": "^0.21.1",
-    "fstream": "^1.0.2",
-    "metaparser": "^1.0.7",
-    "mkdirp": "^0.5.0",
-    "node-unzip-2": "^0.2.7"
-  },
-  "keywords": [
-    "node",
-    "favicon",
-    "realfavicongenerator"
-  ],
-  "devDependencies": {
-    "mocha": "^5.2.0",
-    "rimraf": "^2.4.3"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
