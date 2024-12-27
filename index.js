@@ -250,7 +250,7 @@ module.exports.init = function() {
   // - settings
   // - versioning
   exports.createRequest = function(opts) {
-    // Build favicon generation request
+    // Build the favicon generation request
     var request = {};
     request.api_key = opts.apiKey;
     // Master picture
