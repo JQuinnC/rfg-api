@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies - THIS HAPPENS ONCE during build time
 RUN npm install
 
 # Copy source code

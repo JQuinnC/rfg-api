@@ -41,6 +41,10 @@ module.exports.init = function() {
         return;
       }
       
+      if (!request.api_key) {
+        request.api_key = process.env.RFG_API_KEY;
+      }
+      
       axios.post(
         "https://realfavicongenerator.net/api/favicon", {
           "favicon_generation": request
