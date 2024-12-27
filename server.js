@@ -10,10 +10,23 @@ function validateApiKey(req, res, next) {
   const providedKey = req.headers['x-api-key'];
   const apiKey = process.env.API_KEY;
   
-  console.log('Provided API Key:', providedKey);
-  console.log('Environment API Key:', apiKey);
+  // Structured logging
+  console.log(JSON.stringify({
+    severity: 'DEBUG',
+    message: 'API Key validation',
+    providedKeyExists: !!providedKey,
+    envKeyExists: !!apiKey,
+    providedKeyLength: providedKey ? providedKey.length : 0,
+    envKeyLength: apiKey ? apiKey.length : 0
+  }));
   
   if (!providedKey || providedKey !== apiKey) {
+    console.error(JSON.stringify({
+      severity: 'ERROR',
+      message: 'API Key validation failed',
+      reason: !providedKey ? 'No key provided' : 'Key mismatch'
+    }));
+    
     res.status(401).json({ 
       error: 'Invalid API key',
       provided: providedKey ? 'Key provided' : 'No key provided',
@@ -34,7 +47,11 @@ app.post('/generate', validateApiKey, (req, res) => {
   
   rfg.generateFavicon(request, tempDir, (error, result) => {
     if (error) {
-      console.error('Error generating favicon:', error);
+      console.error(JSON.stringify({
+        severity: 'ERROR',
+        message: 'Favicon generation failed',
+        error: error.toString()
+      }));
       res.status(500).json({ error: error.toString() });
       return;
     }
@@ -51,6 +68,10 @@ app.get('/', (req, res) => {
 // Start the server
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-  console.log('API Key in environment:', process.env.API_KEY ? 'Present' : 'Missing');
+  console.log(JSON.stringify({
+    severity: 'INFO',
+    message: 'Server started',
+    port: port,
+    apiKeyPresent: !!process.env.API_KEY
+  }));
 }); 
