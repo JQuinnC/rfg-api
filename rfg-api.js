@@ -35,7 +35,12 @@ module.exports.init = function() {
   };
 
   exports.generateFavicon = function(request, dest, callback) {
-    mkdirp(dest, function() {
+    mkdirp(dest, function(err) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      
       axios.post(
         "https://realfavicongenerator.net/api/favicon", {
           "favicon_generation": request
